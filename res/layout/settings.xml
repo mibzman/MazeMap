@@ -42,8 +42,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Arrow View" android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/checkBox5" android:layout_below="@+id/checkBox4" android:layout_centerHorizontal="true"
-            android:checked="true" android:textStyle="bold"/>
+            android:id="@+id/checkBox5"
+            android:checked="true" android:textStyle="bold" android:layout_below="@+id/checkBox3"
+            android:layout_alignStart="@+id/checkBox3"/>
     <ImageView
             android:layout_width="75dp"
             android:layout_height="75dp"
