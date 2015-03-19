@@ -10,6 +10,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageView"
             android:src="@drawable/nodaskrub"
-            android:layout_centerVertical="true" android:layout_alignParentStart="true"/>
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"/>
 
 </RelativeLayout>

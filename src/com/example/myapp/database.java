@@ -13,7 +13,7 @@ public class database {
     public static final String MYDATABASE_NAME = "MY_DATABASE";
     public static final int MYDATABASE_VERSION = 1;
 
-
+//SAM IS A BUTT
     public static final String MYDATABASE_TABLE = "ST";
     public static final String KEY_ID = "_id";
     public static final String Z = "Z";
