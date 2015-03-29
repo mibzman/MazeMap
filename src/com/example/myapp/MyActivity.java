@@ -1,84 +1,56 @@
 package com.example.myapp;
 
-import android.app.Activity;
-import android.content.SharedPreferences;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-import java.text.DecimalFormat;
+public class MyActivity extends Activity {
+    String[] menu;
+    DrawerLayout dLayout;
+    ListView dList;
+    ArrayAdapter<String> adapter;
 
-public class MyActivity extends Activity implements SensorEventListener {
-    private float mLastX, mLastY, mLastZ, sAX, sAY, sAZ;
-    private boolean mInitialized;
-    private SensorManager mSensorManager;
-    private Sensor mAccelerometer;
-    private final float NOISE = (float) 2.0;
-    double mXX, mXY;
-    int elaspedTime = 0;
-    float calAX, calAY, calAZ;
-    boolean goStop = false;
-    boolean cal = false;
-    SharedPreferences DATAAA_data;
-    public static String filename1 = "first";
-    boolean val = true;
-    double onex, twox, threex, fourx, fivex, sixx, sevenx, eightx, ninex, tenx =2;
-    double oney, twoy, threey, foury, fivey, sixy, seveny, eighty, niney, teny = 3;
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+@Override
+protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-    }
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-// can be safely ignored for this demo
-    }
-    public void onSensorChanged(SensorEvent event) {
-       /* TextView AX= (TextView)findViewById(R.id.x_accl);
-        TextView AY= (TextView)findViewById(R.id.y_accl);
-        TextView AZ= (TextView)findViewById(R.id.z_accl);
-        TextView VX= (TextView)findViewById(R.id.x_vol);
-        TextView VY= (TextView)findViewById(R.id.y_vol);
-        TextView XX= (TextView) findViewById(R.id.x_loc);
-        TextView XY= (TextView) findViewById(R.id.y_loc);
-        float x = event.values[0];
-        float y = event.values[1];
-        float z = event.values[2];
-        if (!mInitialized) {
-            mLastX = x;
-            mLastY = y;
-            mLastZ = z;
-            AX.setText("0.0");
-            AY.setText("0.0");
-            AZ.setText("0.0");
+        setContentView(R.layout.bestmain);
+        menu = new String[]{"Navigate","Tips", "Settings"};
+        dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        dList = (ListView) findViewById(R.id.left_drawer);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menu);
 
-            mInitialized = true;
-        } else {
-            if (cal) {
-                calAX = mLastX;
-                calAY = mLastY;
-                calAZ = mLastZ;
-                cal = false;
-            } else{
-                double mVX = (((mLastX - calAX) * elaspedTime)/1000);
-                double mVY = ((((mLastY - calAY) * elaspedTime)/1000));
-                mXX = ((((mLastX - calAX) / 2) * elaspedTime * elaspedTime));
-                mXY = ((((mLastY - calAY) / 2) * elaspedTime * elaspedTime));
+        dList.setAdapter(adapter);
+        dList.setSelector(android.R.color.holo_blue_dark);
+        dList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
-                mLastX = x;
-                mLastY = y;
-                mLastZ = z;
-                DecimalFormat df = new DecimalFormat("###.##");
-                AX.setText("A= " + Double.toString(round(mLastX - calAX)) + " m/s/s");
-                AY.setText("A= " + Double.toString(round(mLastY - calAY)) + " m/s/s");
-                AZ.setText("A= " + Double.toString(round(mLastZ - calAZ)) + " m/s/s");
-                VX.setText("V= " + Double.toString(alsoround(mVX)) + " m/s");
-                VY.setText("V= " + Double.toString(alsoround(mVY)) + " m/s");
-                XX.setText("X= " + Double.toString(alsoround(mXX)) + " m");
-                XY.setText("X = " + Double.toString(alsoround(mXY)) + " m");
-            }
-        }*/
-    }
+@Override
+public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
+        dLayout.closeDrawers();
+        //args.putString("Menu", menu[position]);
+
+        if(position == 0) {
+        Fragment Map = new Mapscreen();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, Map).commit();
+        }else if (position== 1){
+        Fragment Tips = new Tips();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, Tips).commit();
+        }else if (position== 2){
+            Fragment Settings = new Settings();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, Settings).commit();
+        }
+        }
+
+        });
+        }
+
 }
