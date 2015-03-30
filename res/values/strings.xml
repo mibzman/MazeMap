@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">myapp</string>
+    <string name="app_name">Maze Map</string>
     <color name="one">#2a37b1</color>
 </resources>
